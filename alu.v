@@ -1,8 +1,8 @@
 module alu(
     input clk,
     input rst,
-    input [2:0]a, 
-    input [2:0]b,
+    input [3:0]a, 
+    input [3:0]b,
     input [2:0]op,
     output reg [3:0]result
 );
@@ -20,15 +20,8 @@ begin
         sub: result<= a-b;
         andd: result<= a&b;
         orr: result<= a|b;
-        nott: 
-        begin
-                if(a)
-                     result<= ~a;
-                else if(b)
-                    result<= ~b;
-                else 
-                    result<=0;
-        end 
+        nott: result <= (a != 0) ? ~a : ~b;
+        endcase  
     end 
 end 
 
